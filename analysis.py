@@ -229,15 +229,19 @@ def confidence_intervals(experiments_file_name, alpha, p0_func, json_file_name):
         max_dist = max(abs(p_L - pi_0), abs(p_U - pi_0))
         min_dist = min(abs(p_L - pi_0), abs(p_U - pi_0))
         overall_max_dist = max(max_dist, overall_max_dist)
+        devlow = ((pi_0-p_L) / pi_0) * 100
+        devhigh = ((pi_0-p_U) / pi_0) * 100
         if overall_min_dist is None:
             overall_min_dist = min_dist
         else:
             overall_min_dist = min(min_dist, overall_min_dist)
         print(
-            "r: {}, confidence interval: {}, pi_0: {}, pi_0 in (p_l,p_u): {}, p in (p_l,p_u: {} max_dist: {},"
+            "r: {}, confidence interval: {}, devlow: {}, devhigh: {}, pi_0: {}, pi_0 in (p_l,p_u): {}, p in (p_l,p_u: {} max_dist: {},"
             "min_dist: {}, k: {}".format(
                 r,
                 (p_L, p_U),
+                devlow,
+                devhigh,
                 pi_0,
                 p0_in_interval,
                 p_in_interval,
